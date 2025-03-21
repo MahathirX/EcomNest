@@ -40,4 +40,18 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
+Route::middleware(['auth', 'verified'])->group(function () {
+    // Role based redricet route
+    Route::get('/dashboard', function () {
+        $user = auth()->user();
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        } elseif ($user->role === 'manager') {
+            return redirect()->route('manager.dashboard');
+        } else {
+            return redirect()->route('user.dashboard');
+        }
+    })->name('dashboard');
+});
+
 require __DIR__.'/auth.php';

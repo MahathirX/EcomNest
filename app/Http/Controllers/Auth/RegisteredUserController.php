@@ -49,13 +49,16 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        // Redirect based on role
-        if ($user->role === 'admin') {
-            return redirect()->route('admin.dashboard');
-        } elseif ($user->role === 'manager') {
-            return redirect()->route('manager.dashboard');
-        } else {
-            return redirect()->route('user.dashboard');
-        }
+        // // Redirect based on role
+        // if ($user->role === 'admin') {
+        //     return redirect()->route('admin.dashboard');
+        // } elseif ($user->role === 'manager') {
+        //     return redirect()->route('manager.dashboard');
+        // } else {
+        //     return redirect()->route('user.dashboard');
+        // }
+        
+
+        return redirect()->route('verification.notice')->with('success', 'আপনার অ্যাকাউন্ট তৈরি হয়েছে, দয়া করে ইমেইল ভেরিফাই করুন।');
     }
 }
